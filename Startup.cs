@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using NanaDoor.Models;
 
 namespace NanaDoor
 {
@@ -24,6 +25,7 @@ namespace NanaDoor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NanaDoorContext>(options => options.UseNpgsql(Configuration["DBInfo:ConnectionString"]));
             services.AddMvc();
             services.AddSession();
             services.AddMvc(config =>
